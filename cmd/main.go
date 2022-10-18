@@ -15,7 +15,7 @@ func main() {
 	nameFetcher := namefetcher.NewNameFetcher(client)
 	jokeBuilder := jokebuilder.NewJokeBuilder(jokeFetcher, nameFetcher)
 
-	handler := transport.NewHandler(*jokeBuilder)
+	handler := transport.NewHandler(jokeBuilder)
 	http.HandleFunc("/", handler.Handle)
 
 	log.Fatalln(http.ListenAndServe(":8080", nil))

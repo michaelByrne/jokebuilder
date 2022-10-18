@@ -2,14 +2,17 @@ package transport
 
 import (
 	"net/http"
-	"task/internal/jokebuilder"
 )
 
-type Handler struct {
-	jokeBuilder jokebuilder.JokeBuilder
+type JokeBuilder interface {
+	BuildJoke(category string) (string, error)
 }
 
-func NewHandler(jokeBuilder jokebuilder.JokeBuilder) *Handler {
+type Handler struct {
+	jokeBuilder JokeBuilder
+}
+
+func NewHandler(jokeBuilder JokeBuilder) *Handler {
 	return &Handler{
 		jokeBuilder: jokeBuilder,
 	}
