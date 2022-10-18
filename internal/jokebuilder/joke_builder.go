@@ -25,6 +25,16 @@ func NewJokeBuilder(jokeFetcher JokeFetcher, nameFetcher NameFetcher) *JokeBuild
 	}
 }
 
-func (j *JokeBuilder) BuildJoke(first, last, category string) (string, error) {
-	
+func (j *JokeBuilder) BuildJoke(category string) (string, error) {
+	name, err := j.nameFetcher.FetchName()
+	if err != nil {
+		return "", err
+	}
+
+	joke, err := j.jokeFetcher.FetchJoke(name.First, name.Last, category)
+	if err != nil {
+		return "", err
+	}
+
+	return joke.Value.Joke, nil
 }
