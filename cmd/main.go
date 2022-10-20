@@ -18,7 +18,7 @@ func main() {
 
 	handler := transport.NewHandler(jokeBuilder)
 
-	jokeApp := app.NewApp(jokeBuilder, handler)
+	jokeApp := app.NewApp(handler)
 
 	log.Fatal(jokeApp.Run())
 }

@@ -3,19 +3,16 @@ package app
 import (
 	"log"
 	"net/http"
-	"task/internal/jokebuilder"
 	"task/internal/transport"
 )
 
 type App struct {
-	jokeBuilder *jokebuilder.JokeBuilder
-	handler     *transport.Handler
+	handler *transport.Handler
 }
 
-func NewApp(jokeBuilder *jokebuilder.JokeBuilder, handler *transport.Handler) *App {
+func NewApp(handler *transport.Handler) *App {
 	return &App{
-		jokeBuilder: jokeBuilder,
-		handler:     handler,
+		handler: handler,
 	}
 }
 
