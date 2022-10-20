@@ -1,6 +1,7 @@
 package app
 
 import (
+	"log"
 	"net/http"
 	"task/internal/jokebuilder"
 	"task/internal/transport"
@@ -20,6 +21,8 @@ func NewApp(jokeBuilder *jokebuilder.JokeBuilder, handler *transport.Handler) *A
 
 func (a *App) Run() error {
 	http.HandleFunc("/", a.handler.Handle)
+
+	log.Println("Starting server on port 8080")
 
 	return http.ListenAndServe(":8080", nil)
 }
