@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"task/app"
 	"task/internal/jokebuilder"
 	"task/internal/jokefetcher"
 	"task/internal/namefetcher"
@@ -16,7 +17,8 @@ func main() {
 	jokeBuilder := jokebuilder.NewJokeBuilder(jokeFetcher, nameFetcher)
 
 	handler := transport.NewHandler(jokeBuilder)
-	http.HandleFunc("/", handler.Handle)
 
-	log.Fatalln(http.ListenAndServe(":8080", nil))
+	jokeApp := app.NewApp(jokeBuilder, handler)
+
+	log.Fatal(jokeApp.Run())
 }
